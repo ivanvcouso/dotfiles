@@ -1,0 +1,10 @@
+alias python=python3
+alias pip=pip3
+
+gpip(){
+    PIP_REQUIRE_VIRTUALENV="" pip "$@"
+}
+
+gpip3(){
+    PIP_REQUIRE_VIRTUALENV="" pip3 "$@"
+}

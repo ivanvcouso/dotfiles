@@ -1,0 +1,45 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" Git Plugin
+Plugin 'tpope/vim-fugitive'
+
+" File Browser
+Bundle 'scrooloose/nerdtree'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+
+" now (after vundle finished) it is save to turn filetype plugins on
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+
+" Encoding
+set encoding=utf-8
+set fileencoding=utf-8
+
+" Spelling
+set spelllang=en,es
+
+" Line Numbers
+set number
+set numberwidth=4
+set cursorline
+
+" Indent
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+
+" NerdTree config
+map <F2> :NERDTreeToggle<CR>
