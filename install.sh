@@ -64,7 +64,6 @@ if [ "$OS" = "darwin" ]; then
 
     # Installing apps
     ensure_link "Brewfile" ".Brewfile"
-    brew bundle --global
     echo "Please, run: brew bundle --file $HOME/.Brewfile\n"
     echo "After everything is finished to install the apps.\n"
 fi
@@ -117,7 +116,7 @@ printf "Configuring git...\n"
 if [ ! -f $HOME/.gitlocal ]; then
     read -p "Enter your full name: " -e FULLNAME
     read -p "Enter your email address: " -e EMAIL
-    echo -e "[user]\n    name = $FULLNAME\n    email = $EMAIL" > $HOME/.gitlocal
+    echo -e "[user]\n    name = ${FULLNAME}\n    email = ${EMAIL}" > $HOME/.gitlocal
 fi
 ensure_link "git/gitignore" ".gitignore_global"
 git config --global core.excludesfile ~/.gitignore_global
