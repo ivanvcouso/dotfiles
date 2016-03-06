@@ -45,7 +45,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(adb battery colorize git git-flow pip sudo tmux vim-interaction virtualenv virtualenvwrapper)
+plugins=(adb battery colorize git git-flow pip python sudo tmux vim-interaction virtualenv virtualenvwrapper brew osx zsh-syntax-highlighting)
 
 # User configuration
 
@@ -60,6 +60,10 @@ if [ $HOME/.aliases ]; then
     source $HOME/.aliases
 fi
 
+# Compilation flags
+export ARCHFLAGS="-arch x86_64"
+
+
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
@@ -73,29 +77,34 @@ export LANG=en_US.UTF-8
 # Which OS?
 export OS=`uname -s | sed -e 's/  */-/g;y/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/'`
 
-# Compilation flags
-export ARCHFLAGS="-arch x86_64"
+if [ "$OS" = "darwin" ]; then
+    fpath=(/usr/local/share/zsh-completions $fpath)
+
+    # Fixing Homebrew Cask:
+    export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+fi
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-# Enabling zsh completions
-# ----------------
-fpath=(/usr/local/share/zsh-completions $fpath)
-# Funtoo:
-# autoload -U compinit
-# compinit
-# zstyle ':completion::complete:*' use-cache 1
+if [ "$OS" = "Linux" ]; then 
+    autoload -U compinit
+    compinit
+fi
+
+zstyle ':completion::complete:*' use-cache 1
 
 # Python Development Enviroment
-export PIP_REQUIRE_VIRTUALENV=true
-export VIRTUALENV_PYTHON=/usr/local/bin/python3
 export WORKON_HOME=~/Workspace/.virtualenvs
 export PROJECT_HOME=~/Workspace
+export VIRTUALENV_PYTHON=/usr/local/bin/python3
 source virtualenvwrapper_lazy.sh
+export PIP_REQUIRE_VIRTUALENV=true
 
 # Getting Android Tools to Work
 export PATH=/opt/android-sdk-update-manager/platform-tools:$PATH
 
-# Fixing Homebrew Cask:
-export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+# Accesing the online help:
+unalias run-help
+autoload run-help
+HELPDIR=/usr/local/share/zsh/help

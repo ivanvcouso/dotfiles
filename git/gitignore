@@ -19,6 +19,7 @@ Icon
 
 # Thumbnails
 ._*
+Thumbs.db
 
 # Files that might appear in the root of a volume
 .DocumentRevisions-V100
@@ -34,3 +35,11 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Compiled Python files
+pycache
+*.pyc
+
+# Compiled C++ files
+*.out
+

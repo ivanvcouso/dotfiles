@@ -42,7 +42,7 @@ if [ "$OS" = "darwin" ]; then
 	printf "Python 2 not installed, installing through Homebrew...\n"
         brew install python
         export PATH=/usr/local/bin:$PATH
-        PIP_REQUIRE_VIRTUALENV="" /usr/local/bin/pip install --upgrade pip setuptools
+        PIP_REQUIRE_VIRTUALENV="" /usr/local/bin/pip2 install --upgrade pip setuptools
     else
         printf "Python 2 already installed.\n"
     fi
@@ -57,22 +57,18 @@ if [ "$OS" = "darwin" ]; then
         printf "Python 3 already installed.\n"
     fi
 
-    # Install Postgresql
-    #if [ ! -f /usr/local/bin/postgres ]; then
-    #    brew install postgresql
-    #fi
-
     # Installing apps
     ensure_link "Brewfile" ".Brewfile"
-    echo "Please, run: brew bundle --file $HOME/.Brewfile\n"
-    echo "After everything is finished to install the apps.\n"
+    echo "Please, run: brew bundle --file $HOME/.Brewfile"
+    echo "After everything is finished to install the apps."
 fi
 
 # Install PostgreSQL
 printf "Installing PostgreSQL..."
 if [ ! -f /usr/local/bin/psql ]; then
-   brew install postgres
-   initdb /usr/local/var/postgres -E utf8
+    brew install postgres
+    ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
+    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
 fi   
 
 # Install global Python packages
@@ -81,10 +77,11 @@ for pkg in virtualenv virtualenvwrapper sphinx
 do
     printf "Installing $pkg...\n"
     if [ ! -f /usr/local/bin/$pkg ]; then
-        PIP_REQUIRE_VIRTUALENV="" pip install $pkg
+        PIP_REQUIRE_VIRTUALENV="" pip2 install $pkg
         PIP_REQUIRE_VIRTUALENV="" pip3 install $pkg
     fi   
 done
+ensure_link "virtualenvs" ".virtualenvs"
 
 # Configure X
 ensure_link "Xresources" ".Xresources"
@@ -125,7 +122,7 @@ git config --global core.excludesfile ~/.gitignore_global
 printf "Configuring Vim...\n"
 
 ## Install Vundle
-test -d $HOME/.dotfiles/vim/bundle/Vundle || git clone http://github.com/gmarik/vundle.git $HOME/.dotfiles/vim/bundle/Vundle
+test -d $HOME/.dotfiles/vim/bundle/Vundle.vim || git clone http://github.com/gmarik/vundle.git $HOME/.dotfiles/vim/bundle/Vundle.vim
 SHELL=$(which sh) vim +BundleInstall +qall
 
 ## Linking config from .dotfiles

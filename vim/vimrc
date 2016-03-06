@@ -1,28 +1,29 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+" Cleaner way to add bundles:
+source ~/.vim/bundles.vim
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+" Airline related settings
+let g:airline_theme = 'solarized'
+let g:airline_left_sep = '⮀'
+let g:airline_left_alt_sep = '⮁'
+let g:airline_right_sep = '⮂'
+let g:airline_right_alt_sep = '⮃'
 
-" Git Plugin
-Plugin 'tpope/vim-fugitive'
-
-" File Browser
-Bundle 'scrooloose/nerdtree'
+if exists("+cursorline")
+    augroup CursorLine
+        autocmd!
+        autocmd InsertEnter * set cursorline
+        autocmd InsertLeave * set nocursorline
+        augroup end
+endif
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 
 " now (after vundle finished) it is save to turn filetype plugins on
 filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
 
 " Encoding
 set encoding=utf-8
@@ -30,6 +31,7 @@ set fileencoding=utf-8
 
 " Spelling
 set spelllang=en,es
+syntax enable
 
 " Line Numbers
 set number
@@ -41,5 +43,36 @@ set shiftwidth=4
 set softtabstop=4
 set expandtab
 
+" Theming
+set background=dark
+colorscheme solarized
+set t_Co=256
+set colorcolumn=100
+let g:solarized_termcolors=256
+
+" Core
+set antialias
+set ruler
+set title
+
+scriptencoding utf-8
+set encoding=utf-8
+
+" Add the virtualenv's site-packages to vim path
+if has('python')
+py << EOF
+import os.path
+import sys
+import vim
+if 'VIRTUAL_ENV' in os.environ:
+    project_base_dir = os.environ['VIRTUAL_ENV']
+    sys.path.insert(0, project_base_dir)
+    activate_this = os.path.join(project_base_dir,
+'bin/activate_this.py')
+    execfile(activate_this, dict(__file__=activate_this))
+EOF
+endif
+
 " NerdTree config
 map <F2> :NERDTreeToggle<CR>
+let NerdTreeIgnore = ['\.pyc$','pycache']

@@ -1,3 +1,8 @@
+# Always get the latest powerline-fonts
 powerline-fonts
+
+# Oh my zsh manages his own directory after install
 zsh/oh-my-zsh
-vim/bundle/Vundle
+
+# Deactivating Vim Bundles as they are git clones
+vim/bundle/*
