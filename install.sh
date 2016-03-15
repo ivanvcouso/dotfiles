@@ -112,8 +112,9 @@ printf "Configuring git...\n"
 # Create .gitlocal file if not present
 if [ ! -f $HOME/.gitlocal ]; then
     read -p "Enter your full name: " -e FULLNAME
+    git config --global user.name "${FULLNAME}"
     read -p "Enter your email address: " -e EMAIL
-    echo -e "[user]\n    name = ${FULLNAME}\n    email = ${EMAIL}" > $HOME/.gitlocal
+    git config --global user.email ${EMAIL}
 fi
 ensure_link "git/gitignore" ".gitignore_global"
 git config --global core.excludesfile ~/.gitignore_global
