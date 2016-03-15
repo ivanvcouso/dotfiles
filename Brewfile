@@ -14,6 +14,7 @@ cask 'appcleaner'
 cask 'flux'
 cask 'caffeine'
 cask 'the-unarchiver'
+cask 'gfxcardstatus'
 
 # Development
 cask 'iterm2'
@@ -21,24 +22,21 @@ cask 'macvim'
 cask 'atom'
 cask 'eclipse-ide'
 cask 'java'
+cask 'dia' # Requires XQuartz, download from:
 
 # Documents
-cask 'mactex'
-cask 'texmaker'
+cask 'texmaker' # Requires Mactex, download from: 
 cask 'libreoffice'
+cask 'calibre'
 
 # Image
 cask 'gimp'
-cask 'xquartz'
-cask 'inkscape'
+cask 'inkscape' # Requires XQuartz
 cask 'blender'
 
 # Android
 cask 'android-file-transfer'
-cask 'android-studio'
-
-# Python
-cask 'pycharm-ce'
+cask 'android-studio' # Requires Java
 
 # Virtualization
 cask 'virtualbox'
@@ -53,6 +51,9 @@ cask 'google-drive'
 cask 'google-hangouts'
 cask 'transmission'
 cask 'skype'
+
+# Music
+cask 'spotify'
 
 # Video
 cask 'vlc'
@@ -71,4 +72,5 @@ cask 'qlprettypatch'
 cask 'betterzipql'
 cask 'quicklook-csv'
 cask 'webpquicklook'
-cask 'suspicious-package'
+cask 'epubquicklook'
+cask 'animated-gif-quicklook'

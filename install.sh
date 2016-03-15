@@ -123,11 +123,13 @@ printf "Configuring Vim...\n"
 
 ## Install Vundle
 test -d $HOME/.dotfiles/vim/bundle/Vundle.vim || git clone http://github.com/gmarik/vundle.git $HOME/.dotfiles/vim/bundle/Vundle.vim
-SHELL=$(which sh) vim +BundleInstall +qall
 
 ## Linking config from .dotfiles
 ensure_link "vim" ".vim"
 ensure_link "vim/vimrc" ".vimrc"
+
+## Installing plugins
+SHELL=$(which sh) vim +BundleInstall +qall
 
 export PIP_REQUIRE_VIRTUALENV="true"
 printf "Dotfiles installed.\n"
